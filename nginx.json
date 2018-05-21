@@ -1,4 +1,8 @@
 {
+  "AWSTemplateFormatVersion" : "2010-09-09",
+
+  "Description" : "Launches a Jenkins server.",
+
   "Parameters" : {
     "InstanceType" : {
       "Description" : "EC2 instance type",

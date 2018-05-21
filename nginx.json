@@ -1,0 +1,48 @@
+{
+  "Parameters" : {
+    "InstanceType" : {
+      "Description" : "EC2 instance type",
+      "Type" : "String",
+      "Default" : "t2.micro",
+      "AllowedValues" : [ "t1.micro","t2.micro","m1.small","m1.medium","m1.large","m1.xlarge","m2.xlarge","m2.2xlarge","m2.4xlarge","m3.xlarge","m3.2xlarge","c1.medium","c1.xlarge","cc1.4xlarge","cc2.8xlarge","cg1.4xlarge"],
+      "ConstraintDescription" : "must be a valid EC2 instance type."
+    },
+    "KeyName" : {
+      "Description" : "Name of an existing EC2 keypair to enable SSH access to the instances",
+      "Type" : "AWS::EC2::KeyPair::KeyName"
+    },
+  
+  "S3Bucket" : {
+      "Description" : "Existing S3 bucket to use for Jenkins backups and restores",
+      "Type" : "String",
+      "Default": "thefactory-jenkins"
+    },
+  
+  "containerDefinitions": [
+    {
+      "name": "nginx",
+      "image": "nginx:latest",
+      "memory": "256",
+      "cpu": "256",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "protocol": "tcp"
+        }
+      ],
+      "logConfiguration": {
+          "logDriver": "awslogs",
+          "options": {
+              "awslogs-group": "awslogs-nginx-ecs",
+              "awslogs-region": "us-east-1",
+              "awslogs-stream-prefix": "nginx"
+          }
+      }
+    }
+  ],
+  "volumes": [],
+  "networkMode": "bridge",
+  "placementConstraints": [],
+  "family": "nginx"
+}

@@ -11,13 +11,7 @@
       "Description" : "Name of an existing EC2 keypair to enable SSH access to the instances",
       "Type" : "AWS::EC2::KeyPair::KeyName"
     },
-  
-  "S3Bucket" : {
-      "Description" : "Existing S3 bucket to use for Jenkins backups and restores",
-      "Type" : "String",
-      "Default": "thefactory-jenkins"
-    },
-  
+ 
   "containerDefinitions": [
     {
       "name": "nginx",
